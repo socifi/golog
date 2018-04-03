@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/apex/log"
-	"github.com/apex/log/handlers/discard"
-	"github.com/apex/log/handlers/memory"
+	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/go-logging-facility/handlers/discard"
+	"github.com/socifi/go-logging-facility/handlers/memory"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/apex/log"
-	"github.com/apex/log/handlers/memory"
-	"github.com/apex/log/handlers/multi"
+	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/go-logging-facility/handlers/memory"
+	"github.com/socifi/go-logging-facility/handlers/multi"
 )
 
 func init() {

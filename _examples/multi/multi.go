@@ -5,10 +5,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/apex/log"
-	"github.com/apex/log/handlers/json"
-	"github.com/apex/log/handlers/multi"
-	"github.com/apex/log/handlers/text"
+	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/go-logging-facility/handlers/json"
+	"github.com/socifi/go-logging-facility/handlers/multi"
+	"github.com/socifi/go-logging-facility/handlers/text"
 )
 
 func main() {

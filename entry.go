@@ -16,8 +16,9 @@ var Now = time.Now
 // Entry represents a single log entry.
 type Entry struct {
 	Logger    *Logger   `json:"-"`
-	Fields    Fields    `json:"fields"`
-	Level     Level     `json:"level"`
+	Fields    Fields    `json:"context"`
+	Level     int       `json:"level"`
+	LevelName string    `json:"level_name"`
 	Timestamp time.Time `json:"timestamp"`
 	Message   string    `json:"message"`
 	start     time.Time
@@ -86,6 +87,11 @@ func (e *Entry) Info(msg string) {
 	e.Logger.log(InfoLevel, e, msg)
 }
 
+// Notice level message.
+func (e *Entry) Notice(msg string) {
+	e.Logger.log(NoticeLevel, e, msg)
+}
+
 // Warn level message.
 func (e *Entry) Warn(msg string) {
 	e.Logger.log(WarnLevel, e, msg)
@@ -94,6 +100,16 @@ func (e *Entry) Warn(msg string) {
 // Error level message.
 func (e *Entry) Error(msg string) {
 	e.Logger.log(ErrorLevel, e, msg)
+}
+
+// Critical level message.
+func (e *Entry) Critical(msg string) {
+	e.Logger.log(CriticalLevel, e, msg)
+}
+
+// Alert level message.
+func (e *Entry) Alert(msg string) {
+	e.Logger.log(AlertLevel, e, msg)
 }
 
 // Fatal level message, followed by an exit.
@@ -165,7 +181,8 @@ func (e *Entry) finalize(level Level, msg string) *Entry {
 	return &Entry{
 		Logger:    e.Logger,
 		Fields:    e.mergedFields(),
-		Level:     level,
+		Level:     level.Int(),
+		LevelName: level.String(),
 		Message:   msg,
 		Timestamp: Now(),
 	}

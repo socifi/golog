@@ -4,13 +4,14 @@ package es
 
 import (
 	"io"
+//	"fmt"
 	stdlog "log"
 	"sync"
 	"time"
 
 	"github.com/tj/go-elastic/batch"
 
-	"github.com/apex/log"
+	"github.com/socifi/go-logging-facility"
 )
 
 // TODO(tj): allow dumping logs to stderr on timeout
@@ -66,11 +67,12 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 		h.batch = &batch.Batch{
 			Index:   time.Now().Format(h.Config.Format),
 			Elastic: h.Client,
-			Type:    "log",
+			Type:    "ble-logging-A",
 		}
 	}
 
 	h.batch.Add(e)
+//	fmt.Println(h.batch)
 
 	if h.batch.Size() >= h.BufferSize {
 		go h.flush(h.batch)
@@ -84,6 +86,7 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 func (h *Handler) flush(batch *batch.Batch) {
 	size := batch.Size()
 	start := time.Now()
+//	fmt.Println("Jsem tu!")
 	stdlog.Printf("log/elastic: flushing %d logs", size)
 
 	if err := batch.Flush(); err != nil {

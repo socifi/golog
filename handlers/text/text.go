@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/apex/log"
+	"github.com/socifi/go-logging-facility"
 )
 
 // Default handler outputting to stderr.

@@ -14,34 +14,49 @@ type Level int
 
 // Log levels.
 const (
-	InvalidLevel Level = iota - 1
-	DebugLevel
-	InfoLevel
-	WarnLevel
-	ErrorLevel
-	FatalLevel
+	InvalidLevel Level = -1
+	DebugLevel = 100
+	InfoLevel = 200
+	NoticeLevel = 250
+	WarnLevel = 300
+	ErrorLevel = 400
+	CriticalLevel = 500
+	AlertLevel = 550
+	FatalLevel = 600
+	EmergencyLevel = 600
 )
 
 var levelNames = [...]string{
 	DebugLevel: "debug",
 	InfoLevel:  "info",
+	NoticeLevel: "notice",
 	WarnLevel:  "warn",
 	ErrorLevel: "error",
-	FatalLevel: "fatal",
+	CriticalLevel: "critical",
+	AlertLevel: "alert",
+	FatalLevel: "emergency",
 }
 
 var levelStrings = map[string]Level{
 	"debug":   DebugLevel,
 	"info":    InfoLevel,
+	"notice":  NoticeLevel,
 	"warn":    WarnLevel,
 	"warning": WarnLevel,
 	"error":   ErrorLevel,
-	"fatal":   FatalLevel,
+	"critical":CriticalLevel,
+	"alert":   AlertLevel,
+	"emergency":FatalLevel,
 }
 
 // String implementation.
 func (l Level) String() string {
 	return levelNames[l]
+}
+
+// String implementation.
+func (l Level) Int() int {
+	return int(l)
 }
 
 // MarshalJSON implementation.
