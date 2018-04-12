@@ -79,6 +79,7 @@ func (l *Logger) WithError(err error) *Entry {
 	return NewEntry(l).WithError(err)
 }
 
+/********* Log simple *********/
 // Debug level message.
 func (l *Logger) Debug(msg string) {
 	NewEntry(l).Debug(msg)
@@ -87,6 +88,11 @@ func (l *Logger) Debug(msg string) {
 // Info level message.
 func (l *Logger) Info(msg string) {
 	NewEntry(l).Info(msg)
+}
+
+// Notice level message.
+func (l *Logger) Notice(msg string) {
+	NewEntry(l).Notice(msg)
 }
 
 // Warn level message.
@@ -99,11 +105,27 @@ func (l *Logger) Error(msg string) {
 	NewEntry(l).Error(msg)
 }
 
-// Fatal level message, followed by an exit.
+// Critical level message.
+func (l *Logger) Critical(msg string) {
+	NewEntry(l).Critical(msg)
+}
+
+// Alert level message.
+func (l *Logger) Alert(msg string) {
+	NewEntry(l).Alert(msg)
+}
+
+// Emergency level message.
+func (l *Logger) Emergency(msg string) {
+	NewEntry(l).Emergency(msg)
+}
+
+// Fatal level message.
 func (l *Logger) Fatal(msg string) {
 	NewEntry(l).Fatal(msg)
 }
 
+/********* Log formated *********/
 // Debugf level formatted message.
 func (l *Logger) Debugf(msg string, v ...interface{}) {
 	NewEntry(l).Debugf(msg, v...)
@@ -112,6 +134,11 @@ func (l *Logger) Debugf(msg string, v ...interface{}) {
 // Infof level formatted message.
 func (l *Logger) Infof(msg string, v ...interface{}) {
 	NewEntry(l).Infof(msg, v...)
+}
+
+// Noticef level formatted message.
+func (l *Logger) Noticef(msg string, v ...interface{}) {
+	NewEntry(l).Noticef(msg, v...)
 }
 
 // Warnf level formatted message.
@@ -124,7 +151,22 @@ func (l *Logger) Errorf(msg string, v ...interface{}) {
 	NewEntry(l).Errorf(msg, v...)
 }
 
-// Fatalf level formatted message, followed by an exit.
+// Criticalf level formatted message.
+func (l *Logger) Criticalf(msg string, v ...interface{}) {
+	NewEntry(l).Criticalf(msg, v...)
+}
+
+// Alertf level formatted message.
+func (l *Logger) Alertf(msg string, v ...interface{}) {
+	NewEntry(l).Alertf(msg, v...)
+}
+
+// Emergencyf level formatted message.
+func (l *Logger) Emergencyf(msg string, v ...interface{}) {
+	NewEntry(l).Emergencyf(msg, v...)
+}
+
+// Fatalf level formatted message.
 func (l *Logger) Fatalf(msg string, v ...interface{}) {
 	NewEntry(l).Fatalf(msg, v...)
 }
