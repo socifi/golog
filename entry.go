@@ -78,47 +78,47 @@ func (e *Entry) WithError(err error) *Entry {
 
 /********* Entry simple *********/
 // Debug level message.
-func (e *Entry) Debug (msg string) {
+func (e *Entry) Debug(msg string) {
 	e.Logger.log(DebugLevel, e, msg)
 }
 
 // Info level message.
-func (e *Entry) Info (msg string) {
+func (e *Entry) Info(msg string) {
 	e.Logger.log(InfoLevel, e, msg)
 }
 
 // Notice level message.
-func (e *Entry) Notice (msg string) {
+func (e *Entry) Notice(msg string) {
 	e.Logger.log(NoticeLevel, e, msg)
 }
 
 // Warn level message.
-func (e *Entry) Warn (msg string) {
+func (e *Entry) Warn(msg string) {
 	e.Logger.log(WarnLevel, e, msg)
 }
 
 // Error level message.
-func (e *Entry) Error (msg string) {
+func (e *Entry) Error(msg string) {
 	e.Logger.log(ErrorLevel, e, msg)
 }
 
 // Critical level message.
-func (e *Entry) Critical (msg string) {
+func (e *Entry) Critical(msg string) {
 	e.Logger.log(CriticalLevel, e, msg)
 }
 
 // Alert level message.
-func (e *Entry) Alert (msg string) {
+func (e *Entry) Alert(msg string) {
 	e.Logger.log(AlertLevel, e, msg)
 }
 
 // Emergency level message.
-func (e *Entry) Emergency (msg string) {
+func (e *Entry) Emergency(msg string) {
 	e.Logger.log(EmergencyLevel, e, msg)
 }
 
 // Fatal level message.
-func (e *Entry) Fatal (msg string) {
+func (e *Entry) Fatal(msg string) {
 	e.Logger.log(FatalLevel, e, msg)
 }
 

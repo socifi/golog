@@ -9,7 +9,7 @@ print("/********* Entry simple *********/")
 for func in func_names:
 	f = func.title()
 	print("""// %s level message.
-func (e *Entry) %s (msg string) {
+func (e *Entry) %s(msg string) {
 	e.Logger.log(%sLevel, e, msg)
 }
 """ % (f, f, f))
