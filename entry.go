@@ -2,7 +2,6 @@ package log
 
 import (
 	"fmt"
-	"os"
 	"strings"
 	"time"
 )
@@ -77,6 +76,7 @@ func (e *Entry) WithError(err error) *Entry {
 	return ctx
 }
 
+/********* Entry simple *********/
 // Debug level message.
 func (e *Entry) Debug(msg string) {
 	e.Logger.log(DebugLevel, e, msg)
@@ -112,12 +112,17 @@ func (e *Entry) Alert(msg string) {
 	e.Logger.log(AlertLevel, e, msg)
 }
 
-// Fatal level message, followed by an exit.
-func (e *Entry) Fatal(msg string) {
-	e.Logger.log(FatalLevel, e, msg)
-	os.Exit(1)
+// Emergency level message.
+func (e *Entry) Emergency(msg string) {
+	e.Logger.log(EmergencyLevel, e, msg)
 }
 
+// Fatal level message.
+func (e *Entry) Fatal(msg string) {
+	e.Logger.log(FatalLevel, e, msg)
+}
+
+/********* Entry formated *********/
 // Debugf level formatted message.
 func (e *Entry) Debugf(msg string, v ...interface{}) {
 	e.Debug(fmt.Sprintf(msg, v...))
@@ -126,6 +131,11 @@ func (e *Entry) Debugf(msg string, v ...interface{}) {
 // Infof level formatted message.
 func (e *Entry) Infof(msg string, v ...interface{}) {
 	e.Info(fmt.Sprintf(msg, v...))
+}
+
+// Noticef level formatted message.
+func (e *Entry) Noticef(msg string, v ...interface{}) {
+	e.Notice(fmt.Sprintf(msg, v...))
 }
 
 // Warnf level formatted message.
@@ -138,7 +148,22 @@ func (e *Entry) Errorf(msg string, v ...interface{}) {
 	e.Error(fmt.Sprintf(msg, v...))
 }
 
-// Fatalf level formatted message, followed by an exit.
+// Criticalf level formatted message.
+func (e *Entry) Criticalf(msg string, v ...interface{}) {
+	e.Critical(fmt.Sprintf(msg, v...))
+}
+
+// Alertf level formatted message.
+func (e *Entry) Alertf(msg string, v ...interface{}) {
+	e.Alert(fmt.Sprintf(msg, v...))
+}
+
+// Emergencyf level formatted message.
+func (e *Entry) Emergencyf(msg string, v ...interface{}) {
+	e.Emergency(fmt.Sprintf(msg, v...))
+}
+
+// Fatalf level formatted message.
 func (e *Entry) Fatalf(msg string, v ...interface{}) {
 	e.Fatal(fmt.Sprintf(msg, v...))
 }
