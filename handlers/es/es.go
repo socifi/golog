@@ -26,19 +26,21 @@ type Elasticsearch interface {
 
 // Config for handler.
 type Config struct {
-	BufferSize int           // BufferSize is the number of logs to buffer before flush (default: 100)
-	Format     string        // Format for index
-	Client     Elasticsearch // Client for ES
+	BufferSize	int		// BufferSize is the number of logs to buffer before flush (default: 1)
+	Format		string		// Format for index, supports both name of index and time shard format
+					// (It supports standard golang formatting, so format might be for example "log-2006-01-02" or "log-06-01-02")
+	Type		string		// Type of entry, gets translated to "_type" in resulting json
+	Client		Elasticsearch	// Client for ES
 }
 
 // defaults applies defaults to the config.
 func (c *Config) defaults() {
 	if c.BufferSize == 0 {
-		c.BufferSize = 100
+		c.BufferSize = 1
 	}
 
 	if c.Format == "" {
-		c.Format = "logs-06-01-02"
+		c.Format = "logs-2006-01-02"
 	}
 }
 
@@ -67,7 +69,7 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 		h.batch = &batch.Batch{
 			Index:   time.Now().Format(h.Config.Format),
 			Elastic: h.Client,
-			Type:    "ble-logging-A",
+			Type:    h.Type,
 		}
 	}
 
@@ -75,7 +77,7 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 //	fmt.Println(h.batch)
 
 	if h.batch.Size() >= h.BufferSize {
-		go h.flush(h.batch)
+		h.flush(h.batch)
 		h.batch = nil
 	}
 
