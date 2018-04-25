@@ -1,6 +1,7 @@
 package log
 
 import (
+	"fmt"
 	"encoding/json"
 	"testing"
 
@@ -24,7 +25,8 @@ func TestParseLevel(t *testing.T) {
 	for _, c := range cases {
 		t.Run(c.String, func(t *testing.T) {
 			l, err := ParseLevel(c.String)
-			assert.NoError(t, err, "parse")
+			msg := fmt.Sprintf("parse %s", c.String)
+			assert.NoError(t, err, msg)
 			assert.Equal(t, c.Level, l)
 		})
 	}
@@ -39,11 +41,12 @@ func TestParseLevel(t *testing.T) {
 func TestLevel_MarshalJSON(t *testing.T) {
 	e := Entry{
 		Level:   InfoLevel,
+		LevelName:"info",
 		Message: "hello",
 		Fields:  Fields{},
 	}
 
-	expect := `{"fields":{},"level":"info","timestamp":"0001-01-01T00:00:00Z","message":"hello"}`
+	expect := `{"context":{},"level":200,"level_name":"info","timestamp":"0001-01-01T00:00:00Z","message":"hello"}`
 
 	b, err := json.Marshal(e)
 	assert.NoError(t, err)
@@ -51,7 +54,7 @@ func TestLevel_MarshalJSON(t *testing.T) {
 }
 
 func TestLevel_UnmarshalJSON(t *testing.T) {
-	s := `{"fields":{},"level":"info","timestamp":"0001-01-01T00:00:00Z","message":"hello"}`
+	s := `{"fields":{},"level":200,"level_name":"info","timestamp":"0001-01-01T00:00:00Z","message":"hello"}`
 	e := new(Entry)
 
 	err := json.Unmarshal([]byte(s), e)

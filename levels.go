@@ -27,31 +27,32 @@ const (
 )
 
 var levelNames = [...]string{
-	DebugLevel: "debug",
-	InfoLevel:  "info",
-	NoticeLevel: "notice",
-	WarnLevel:  "warn",
-	ErrorLevel: "error",
-	CriticalLevel: "critical",
-	AlertLevel: "alert",
-	FatalLevel: "emergency",
+	DebugLevel:	"debug",
+	InfoLevel:	"info",
+	NoticeLevel:	"notice",
+	WarnLevel:	"warn",
+	ErrorLevel:	"error",
+	CriticalLevel:	"critical",
+	AlertLevel:	"alert",
+	FatalLevel:	"emergency",
 }
 
 var levelStrings = map[string]Level{
-	"debug":   DebugLevel,
-	"info":    InfoLevel,
-	"notice":  NoticeLevel,
-	"warn":    WarnLevel,
-	"warning": WarnLevel,
-	"error":   ErrorLevel,
-	"critical":CriticalLevel,
-	"alert":   AlertLevel,
-	"emergency":FatalLevel,
+	"debug":	DebugLevel,
+	"info":		InfoLevel,
+	"notice":	NoticeLevel,
+	"warn":		WarnLevel,
+	"warning":	WarnLevel,
+	"error":	ErrorLevel,
+	"critical":	CriticalLevel,
+	"alert":	AlertLevel,
+	"fatal":	FatalLevel,
+	"emergency":	FatalLevel,
 }
 
 // String implementation.
 func (l Level) String() string {
-	return levelNames[l]
+	return levelNames[int(l)]
 }
 
 // String implementation.

@@ -51,4 +51,43 @@ func (l *Logger) %sf(msg string, v ...interface{}) {
 }
 """ % (f, f, f))
 
+############################
+# Pkg wide simple messages #
+############################
+print("/********* Pkg wide simple *********/")
+for func in func_names:
+	f = func.title()
+	print("""// %s level message.
+func %s(msg string) {
+	Log.%s(msg)
+}
+""" % (f, f, f))
+
+##############################
+# Pkg wide formated messages #
+##############################
+print("/********* Pkg wide formated *********/")
+for func in func_names:
+	f = func.title()
+	print("""// %sf level message.
+func %sf(msg string, v ...interface{}) {
+	Log.%sf(msg, v...)
+}
+""" % (f, f, f))
+
+#############################
+# Interface simple messages #
+#############################
+print("/********* Interface simple *********/")
+for func in func_names:
+	f = func.title()
+	print("""	%s(msg string)""" % (f))
+
+###############################
+# Interface formated messages #
+###############################
+print("/********* Interface formated *********/")
+for func in func_names:
+	f = func.title()
+	print("""	%sf(msg string, v ...interface{})""" % (f))
 

@@ -43,6 +43,7 @@ func WithError(err error) *Entry {
 	return Log.WithError(err)
 }
 
+/********* Pkg wide simple *********/
 // Debug level message.
 func Debug(msg string) {
 	Log.Debug(msg)
@@ -51,6 +52,11 @@ func Debug(msg string) {
 // Info level message.
 func Info(msg string) {
 	Log.Info(msg)
+}
+
+// Notice level message.
+func Notice(msg string) {
+	Log.Notice(msg)
 }
 
 // Warn level message.
@@ -63,32 +69,68 @@ func Error(msg string) {
 	Log.Error(msg)
 }
 
-// Fatal level message, followed by an exit.
+// Critical level message.
+func Critical(msg string) {
+	Log.Critical(msg)
+}
+
+// Alert level message.
+func Alert(msg string) {
+	Log.Alert(msg)
+}
+
+// Emergency level message.
+func Emergency(msg string) {
+	Log.Emergency(msg)
+}
+
+// Fatal level message.
 func Fatal(msg string) {
 	Log.Fatal(msg)
 }
 
-// Debugf level formatted message.
+/********* Pkg wide formated *********/
+// Debugf level message.
 func Debugf(msg string, v ...interface{}) {
 	Log.Debugf(msg, v...)
 }
 
-// Infof level formatted message.
+// Infof level message.
 func Infof(msg string, v ...interface{}) {
 	Log.Infof(msg, v...)
 }
 
-// Warnf level formatted message.
+// Noticef level message.
+func Noticef(msg string, v ...interface{}) {
+	Log.Noticef(msg, v...)
+}
+
+// Warnf level message.
 func Warnf(msg string, v ...interface{}) {
 	Log.Warnf(msg, v...)
 }
 
-// Errorf level formatted message.
+// Errorf level message.
 func Errorf(msg string, v ...interface{}) {
 	Log.Errorf(msg, v...)
 }
 
-// Fatalf level formatted message, followed by an exit.
+// Criticalf level message.
+func Criticalf(msg string, v ...interface{}) {
+	Log.Criticalf(msg, v...)
+}
+
+// Alertf level message.
+func Alertf(msg string, v ...interface{}) {
+	Log.Alertf(msg, v...)
+}
+
+// Emergencyf level message.
+func Emergencyf(msg string, v ...interface{}) {
+	Log.Emergencyf(msg, v...)
+}
+
+// Fatalf level message.
 func Fatalf(msg string, v ...interface{}) {
 	Log.Fatalf(msg, v...)
 }
