@@ -39,6 +39,10 @@ func (c *Config) defaults() {
 		c.BufferSize = 1
 	}
 
+	if c.Type == "" {
+		c.Format = "log"
+	}
+
 	if c.Format == "" {
 		c.Format = "logs-2006-01-02"
 	}
@@ -55,9 +59,14 @@ type Handler struct {
 // New handler with BufferSize
 func New(config *Config) *Handler {
 	config.defaults()
-	return &Handler{
+	h := &Handler{
 		Config: config,
 	}
+
+	log.AddExitHandler(func() {
+		h.flush()
+	})
+	return h
 }
 
 // HandleLog implements log.Handler.
@@ -74,10 +83,9 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 	}
 
 	h.batch.Add(e)
-//	fmt.Println(h.batch)
 
 	if h.batch.Size() >= h.BufferSize {
-		h.flush(h.batch)
+		h.flush()
 		h.batch = nil
 	}
 
@@ -85,13 +93,12 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 }
 
 // flush the given `batch` asynchronously.
-func (h *Handler) flush(batch *batch.Batch) {
-	size := batch.Size()
+func (h *Handler) flush() {
+	size := h.batch.Size()
 	start := time.Now()
-//	fmt.Println("Jsem tu!")
 	stdlog.Printf("log/elastic: flushing %d logs", size)
 
-	if err := batch.Flush(); err != nil {
+	if err := h.batch.Flush(); err != nil {
 		stdlog.Printf("log/elastic: failed to flush %d logs: %s", size, err)
 	}
 

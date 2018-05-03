@@ -25,5 +25,8 @@ type Interface interface {
 	Alertf(msg string, v ...interface{})
 	Emergencyf(msg string, v ...interface{})
 	Fatalf(msg string, v ...interface{})
+
 	Trace(msg string) *Entry
+	Exit(code int)
+	AddExitHandler(handler func())
 }
