@@ -94,12 +94,16 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 
 // flush the given `batch` asynchronously.
 func (h *Handler) flush() {
+	if  h.batch == nil {
+		return
+	}
 	size := h.batch.Size()
 	start := time.Now()
 	stdlog.Printf("log/elastic: flushing %d logs", size)
 
 	if err := h.batch.Flush(); err != nil {
 		stdlog.Printf("log/elastic: failed to flush %d logs: %s", size, err)
+		return
 	}
 
 	stdlog.Printf("log/elastic: flushed %d logs in %s", size, time.Since(start))
