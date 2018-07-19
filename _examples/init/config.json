@@ -21,7 +21,7 @@
 				"array": ["one", "two", "three"],
 				"field": "something"
 			}
-		}
+		},
 		"additionalFields": {
 			"env": "dev",
 			"project": "connect"
