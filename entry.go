@@ -2,6 +2,7 @@ package log
 
 import (
 	"fmt"
+	"os"
 	"strings"
 	"time"
 )
@@ -22,6 +23,9 @@ type Entry struct {
 	Message   string    `json:"message"`
 	start     time.Time
 	fields    []Fields
+	Env       string 	`json:"env"`
+	Project   string 	`json:"project"`
+	Hostname  string 	`json:"hostname"`
 }
 
 // NewEntry returns a new entry for `log`.
@@ -36,9 +40,25 @@ func (e *Entry) WithFields(fields Fielder) *Entry {
 	f := []Fields{}
 	f = append(f, e.fields...)
 	f = append(f, fields.Fields())
+
 	return &Entry{
-		Logger: e.Logger,
-		fields: f,
+		Logger:   e.Logger,
+		fields:   f,
+		Hostname: e.Hostname,
+		Env:      e.Env,
+		Project:  e.Project,
+	}
+}
+
+func (e *Entry) SetAdditionalFields(fields Fielder) *Entry {
+	e.Hostname, _ = os.Hostname()
+	e.Env = fields.Fields()["env"].(string)
+	e.Project = fields.Fields()["project"].(string)
+	return &Entry{
+		Hostname: e.Hostname,
+		Env:      e.Env,
+		Project:  e.Project,
+		Logger:   e.Logger,
 	}
 }
 
@@ -210,5 +230,8 @@ func (e *Entry) finalize(level Level, msg string) *Entry {
 		LevelName: level.String(),
 		Message:   msg,
 		Timestamp: Now(),
+		Env:       e.Env,
+		Project:   e.Project,
+		Hostname:  e.Hostname,
 	}
 }

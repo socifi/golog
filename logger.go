@@ -66,6 +66,11 @@ func (l *Logger) WithFields(fields Fielder) *Entry {
 	return NewEntry(l).WithFields(fields.Fields())
 }
 
+// SetAdditionalFields returns a entry with env, project and hostname fields set.
+func (l *Logger) SetAdditionalFields(fields Fielder) *Entry {
+	return NewEntry(l).SetAdditionalFields(fields.Fields())
+}
+
 // WithField returns a new entry with the `key` and `value` set.
 //
 // Note that the `key` should not have spaces in it - use camel

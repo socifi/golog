@@ -1,0 +1,30 @@
+{
+	"logging": {
+		"logLevel": "info",
+		"handlers":{
+			"elastic": {
+				"host": "localhost",
+				"port": 9200,
+				"timeout": 5,
+				"format": "client-data-export-manager-2006-01-02",
+				"type": "client-data-export-manager"
+			},
+			"json": {
+				"file": "stdout"
+			},
+			"text": {
+				"file": "stdout"
+			}
+		},
+		"context": {
+			"composed": {
+				"array": ["one", "two", "three"],
+				"field": "something"
+			}
+		}
+		"additionalFields":{
+			"env": "dev",
+			"project": "connect"
+		}
+	}
+}

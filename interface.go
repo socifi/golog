@@ -2,10 +2,11 @@ package log
 
 // Interface represents the API of both Logger and Entry.
 type Interface interface {
+	SetAdditionalFields(fields Fielder) *Entry
 	WithFields(fields Fielder) *Entry
 	WithField(key string, value interface{}) *Entry
 	WithError(err error) *Entry
-/********* Interface simple *********/
+	/********* Interface simple *********/
 	Debug(msg string)
 	Info(msg string)
 	Notice(msg string)
@@ -15,7 +16,7 @@ type Interface interface {
 	Alert(msg string)
 	Emergency(msg string)
 	Fatal(msg string)
-/********* Interface formated *********/
+	/********* Interface formated *********/
 	Debugf(msg string, v ...interface{})
 	Infof(msg string, v ...interface{})
 	Noticef(msg string, v ...interface{})
