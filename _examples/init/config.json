@@ -22,7 +22,7 @@
 				"field": "something"
 			}
 		}
-		"additionalFields":{
+		"additionalFields": {
 			"env": "dev",
 			"project": "connect"
 		}
