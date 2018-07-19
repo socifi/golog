@@ -66,9 +66,9 @@ func (l *Logger) WithFields(fields Fielder) *Entry {
 	return NewEntry(l).WithFields(fields.Fields())
 }
 
-// SetAdditionalFields returns a entry with env, project and hostname fields set.
-func (l *Logger) SetAdditionalFields(fields Fielder) *Entry {
-	return NewEntry(l).SetAdditionalFields(fields.Fields())
+// SetEnvProject returns a entry with env, project and hostname fields set.
+func (l *Logger) SetEnvProject(env string, project string) *Entry {
+	return NewEntry(l).SetEnvProject(env, project)
 }
 
 // WithField returns a new entry with the `key` and `value` set.

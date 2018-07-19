@@ -1,5 +1,7 @@
 {
 	"logging": {
+		"env": "dev",
+		"project": "connect",
 		"logLevel": "info",
 		"handlers":{
 			"elastic": {
@@ -21,10 +23,6 @@
 				"array": ["one", "two", "three"],
 				"field": "something"
 			}
-		},
-		"additionalFields": {
-			"env": "dev",
-			"project": "connect"
 		}
 	}
 }

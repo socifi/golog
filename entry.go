@@ -23,9 +23,9 @@ type Entry struct {
 	Message   string    `json:"message"`
 	start     time.Time
 	fields    []Fields
-	Env       string 	`json:"env"`
-	Project   string 	`json:"project"`
-	Hostname  string 	`json:"hostname"`
+	Env       string `json:"env"`
+	Project   string `json:"project"`
+	Hostname  string `json:"hostname"`
 }
 
 // NewEntry returns a new entry for `log`.
@@ -50,10 +50,10 @@ func (e *Entry) WithFields(fields Fielder) *Entry {
 	}
 }
 
-func (e *Entry) SetAdditionalFields(fields Fielder) *Entry {
+func (e *Entry) SetEnvProject(env string, project string) *Entry {
 	e.Hostname, _ = os.Hostname()
-	e.Env = fields.Fields()["env"].(string)
-	e.Project = fields.Fields()["project"].(string)
+	e.Env = env
+	e.Project = project
 	return &Entry{
 		Hostname: e.Hostname,
 		Env:      e.Env,

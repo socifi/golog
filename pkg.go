@@ -14,9 +14,9 @@ func SetHandler(h Handler) {
 	}
 }
 
-//SetAdditionalFields sets the env,project and hostname fields into log.
-func SetAdditionalFields(fields Fielder) *Entry {
-	return Log.SetAdditionalFields(fields)
+//SetEnvProject sets the env,project and hostname fields into log.
+func SetEnvProject(env string, project string) *Entry {
+	return Log.SetEnvProject(env, project)
 }
 
 // SetLevel sets the log level. This is not thread-safe.
