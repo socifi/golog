@@ -5,6 +5,8 @@ import (
 	"os"
 	"strings"
 	"time"
+
+	"github.com/pkg/errors"
 )
 
 // assert interface compliance.
@@ -40,7 +42,6 @@ func (e *Entry) WithFields(fields Fielder) *Entry {
 	f := []Fields{}
 	f = append(f, e.fields...)
 	f = append(f, fields.Fields())
-
 	return &Entry{
 		Logger:   e.Logger,
 		fields:   f,
@@ -68,31 +69,33 @@ func (e *Entry) WithField(key string, value interface{}) *Entry {
 }
 
 // WithError returns a new entry with the "error" set to `err`.
-//
 // The given error may implement .Fielder, if it does the method
 // will add all its `.Fields()` into the returned entry.
 func (e *Entry) WithError(err error) *Entry {
-	ctx := e.WithField("error", err.Error())
-
-	if s, ok := err.(stackTracer); ok {
-		frame := s.StackTrace()[0]
+	var errorMap = map[string]interface{}{
+		"trace":   "",
+		"message": err.Error(),
+	}
+	ctx := e.WithField("error", errorMap)
+	stack := errors.WithStack(err)
+	if s, ok := stack.(stackTracer); ok {
+		frame := s.StackTrace()[1]
 
 		name := fmt.Sprintf("%n", frame)
 		file := fmt.Sprintf("%+s", frame)
 		line := fmt.Sprintf("%d", frame)
 
 		parts := strings.Split(file, "\n\t")
-		if len(parts) > 1 {
+		if (len(parts)) > 1 {
 			file = parts[1]
 		}
-
-		ctx = ctx.WithField("source", fmt.Sprintf("%s: %s:%s", name, file, line))
+		paths := fmt.Sprintf(`%s:%s:%s`, name, file, line)
+		errorMap["trace"] = paths
+		ctx = ctx.WithField("error", errorMap)
 	}
-
 	if f, ok := err.(Fielder); ok {
 		ctx = ctx.WithFields(f.Fields())
 	}
-
 	return ctx
 }
 
