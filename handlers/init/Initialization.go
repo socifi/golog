@@ -26,7 +26,7 @@ func Init(config LogConfig) (logger *log.Entry) {
 	h, _ := config.Handlers.(map[string]interface{})
 
 	var handlers []log.Handler
-	if h["json"] != nil {
+	if (h["json"]) != nil {
 		info, _ := h["json"].(map[string]string)
 		var file *os.File
 		if info["file"] == "stdout" || info["file"] == "" {
@@ -37,7 +37,7 @@ func Init(config LogConfig) (logger *log.Entry) {
 		handlers = append(handlers, json.New(file))
 	}
 
-	if h["text"] != nil {
+	if (h["text"]) != nil {
 		info, _ := h["text"].(map[string]string)
 		var file *os.File
 		if info["file"] == "stdout" || info["file"] == "" {
@@ -48,7 +48,7 @@ func Init(config LogConfig) (logger *log.Entry) {
 		handlers = append(handlers, text.New(file))
 	}
 
-	if h["elastic"] != nil {
+	if (h["elastic"]) != nil {
 		info, _ := h["elastic"].(map[string]interface{})
 		url := fmt.Sprintf("%s:%d", info["host"].(string), int(info["port"].(float64)))
 		esClient := elastic.New(url)

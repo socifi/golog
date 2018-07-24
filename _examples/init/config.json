@@ -1,7 +1,7 @@
 {
 	"logging": {
-		"env": "dev",
-		"project": "connect",
+		"env": "myExampleEnv",
+		"project": "myExampleProject",
 		"logLevel": "info",
 		"handlers":{
 			"elastic": {
