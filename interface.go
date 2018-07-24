@@ -2,7 +2,7 @@ package log
 
 // Interface represents the API of both Logger and Entry.
 type Interface interface {
-	SetAdditionalFields(fields Fielder) *Entry
+	SetEnvProject(env string, project string) *Entry
 	WithFields(fields Fielder) *Entry
 	WithField(key string, value interface{}) *Entry
 	WithError(err error) *Entry
