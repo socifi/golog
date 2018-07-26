@@ -3,11 +3,19 @@ package main
 import (
 	"errors"
 	"os"
+	"fmt"
 	"time"
+	"runtime/debug"
 
 	"github.com/socifi/go-logging-facility"
 	"github.com/socifi/go-logging-facility/handlers/json"
 )
+
+func one(ctx log.Interface) {
+	ctx.WithError(errors.New("unauthorized")).Error("upload failed")
+	s := debug.Stack()
+	fmt.Println(string(s))
+}
 
 func main() {
 	log.SetHandler(json.New(os.Stderr))
@@ -22,6 +30,7 @@ func main() {
 		ctx.Info("upload")
 		ctx.Info("upload complete")
 		ctx.Warn("upload retry")
-		ctx.WithError(errors.New("unauthorized")).Error("upload failed")
+		one(ctx)
+//		ctx.WithError(errors.New("unauthorized")).Error("upload failed")
 	}
 }
