@@ -146,8 +146,8 @@ replace("interface.go", "Interface formated", s)
 #################
 s = ""
 for level, n in levels.items():
-	f = level.title()
-	s = s+"	%sLevel = %d\n" % (f,n)
+	f = level.lower()
+	s = s+"	%sLevel = %d\n" % (f.title(),n)
 replace("levels.go", "Level numbers", s)
 
 ###########################
@@ -156,10 +156,10 @@ replace("levels.go", "Level numbers", s)
 s = ""
 c = set()
 for level, n in levels.items():
-	f = level.title()
+	f = level.lower()
 	if n not in c:
 		c.add(n)
-		s = s+"	%sLevel:	\"%s\",\n" % (f, f)
+		s = s+"	%sLevel:	\"%s\",\n" % (f.title(), f)
 replace("levels.go", "Level no:name", s)
 
 ###########################
@@ -167,6 +167,6 @@ replace("levels.go", "Level no:name", s)
 ###########################
 s = ""
 for level, n in levels.items():
-	f = level.title()
-	s = s+"	\"%s\":	%sLevel,\n" % (f, f)
+	f = level.lower()
+	s = s+"	\"%s\":	%sLevel,\n" % (f, f.title())
 replace("levels.go", "Level name:no", s)
