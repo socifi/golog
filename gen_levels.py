@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
 
-levels = {"debug":100, "info":200, "notice":250, "warn":300, "error":400, "critical":500, "alert":550, "fatal":600, "emergency":600}
+levels = {
+	"debug": 100,
+	"info": 200,
+	"notice": 250,
+	"warn": 300,
+	"error": 400,
+	"critical": 500,
+	"alert":550,
+	"fatal":600,
+	"emergency":600
+}
 
 # Function for replacing part of file between marks
 def replace(file, mark, string):
