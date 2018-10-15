@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"time"
+	"strings"
+	"regexp"
 	"runtime/debug"
 )
 
@@ -61,8 +63,28 @@ func (e *Entry) SetEnvProject(env string, project string) *Entry {
 	}
 }
 
+func replaceDsnPassword(s string) (string) {
+	r := regexp.MustCompile(`(.*?://)*(.+?:)(.+?)(@)`)
+	if r.MatchString(s) {
+		return r.ReplaceAllString(s, "${1}${2}***${4}")
+	}
+
+	r = regexp.MustCompile(`\s(p)(assword)?(=)(.*)\s`)
+	if r.MatchString(s) {
+		return r.ReplaceAllString(s, " ${1}${2}${3}*** ")
+	}
+
+	return s
+}
+
+
 // WithField returns a new entry with the `key` and `value` set.
 func (e *Entry) WithField(key string, value interface{}) *Entry {
+	if strings.Contains(strings.ToLower(key), "dsn") {
+		if _, ok := value.(string); ok {
+			return e.WithFields(Fields{key: replaceDsnPassword(value.(string))})
+		}
+	}
 	return e.WithFields(Fields{key: value})
 }
 
@@ -211,7 +233,15 @@ func (e *Entry) mergedFields() Fields {
 
 	for _, fields := range e.fields {
 		for k, v := range fields {
-			f[k] = v
+			if strings.Contains(strings.ToLower(k), "dsn") {
+				if _, ok := v.(string); ok {
+					f[k] = replaceDsnPassword(v.(string))
+				} else {
+					f[k] = v
+				}
+			} else {
+				f[k] = v
+			}
 		}
 	}
 
