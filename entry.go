@@ -63,15 +63,16 @@ func (e *Entry) SetEnvProject(env string, project string) *Entry {
 	}
 }
 
+// replaceDsnPassword tries its best to replace all passwords in a string which has dsn format
 func replaceDsnPassword(s string) (string) {
 	r := regexp.MustCompile(`(.*?://)*(.+?:)(.+?)(@)`)
 	if r.MatchString(s) {
-		return r.ReplaceAllString(s, "${1}${2}***${4}")
+		s = r.ReplaceAllString(s, "${1}${2}***${4}")
 	}
 
-	r = regexp.MustCompile(`\s(p)(assword)?(=)(.*)\s`)
+	r = regexp.MustCompile(`([\s;])(p|password|pwd|pass|P|PASSWORD|PWD|PASS|Password|Pwd|Pass)([=:])(.*?)([\s;])`)
 	if r.MatchString(s) {
-		return r.ReplaceAllString(s, " ${1}${2}${3}*** ")
+		s = r.ReplaceAllString(s, "${1}${2}${3}***${5}")
 	}
 
 	return s
