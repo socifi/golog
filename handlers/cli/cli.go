@@ -8,9 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
 	"github.com/fatih/color"
 	colorable "github.com/mattn/go-colorable"
+	"github.com/socifi/go-logging-facility"
 )
 
 // Default handler outputting to stderr.

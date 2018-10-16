@@ -9,8 +9,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
 	"github.com/aybabtme/rgbterm"
+	"github.com/socifi/go-logging-facility"
 	"github.com/tj/go-spin"
 )
 

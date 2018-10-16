@@ -4,7 +4,7 @@ package es
 
 import (
 	"io"
-//	"fmt"
+	//	"fmt"
 	stdlog "log"
 	"sync"
 	"time"
@@ -26,11 +26,11 @@ type Elasticsearch interface {
 
 // Config for handler.
 type Config struct {
-	BufferSize	int		// BufferSize is the number of logs to buffer before flush (default: 1)
-	Format		string		// Format for index, supports both name of index and time shard format
-					// (It supports standard golang formatting, so format might be for example "log-2006-01-02" or "log-06-01-02")
-	Type		string		// Type of entry, gets translated to "_type" in resulting json
-	Client		Elasticsearch	// Client for ES
+	BufferSize int    // BufferSize is the number of logs to buffer before flush (default: 1)
+	Format     string // Format for index, supports both name of index and time shard format
+	// (It supports standard golang formatting, so format might be for example "log-2006-01-02" or "log-06-01-02")
+	Type   string        // Type of entry, gets translated to "_type" in resulting json
+	Client Elasticsearch // Client for ES
 }
 
 // defaults applies defaults to the config.
@@ -94,7 +94,7 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 
 // flush the given `batch` asynchronously.
 func (h *Handler) flush() {
-	if  h.batch == nil {
+	if h.batch == nil {
 		return
 	}
 	size := h.batch.Size()

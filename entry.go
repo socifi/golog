@@ -50,6 +50,7 @@ func (e *Entry) WithFields(fields Fielder) *Entry {
 	}
 }
 
+// SetEnvProject returns new instance with important info set up
 func (e *Entry) SetEnvProject(env string, project string) *Entry {
 	e.Hostname, _ = os.Hostname()
 	e.Env = env
@@ -61,6 +62,7 @@ func (e *Entry) SetEnvProject(env string, project string) *Entry {
 		Logger:   e.Logger,
 	}
 }
+
 
 // WithField returns a new entry with the `key` and `value` set.
 func (e *Entry) WithField(k string, v interface{}) *Entry {

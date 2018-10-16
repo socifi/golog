@@ -14,6 +14,7 @@ import (
 	"github.com/tj/go-elastic"
 )
 
+// LogConfig contains all needed information for logger initialization
 type LogConfig struct {
 	LogLevel string      `json:"logLevel"`
 	Handlers interface{} `json:"handlers,omitempty"`
@@ -22,6 +23,7 @@ type LogConfig struct {
 	Project  string      `json:"project"`
 }
 
+// Init initializes logger with values from LogConfig structure
 func Init(config LogConfig) (logger *log.Entry) {
 	h, _ := config.Handlers.(map[string]interface{})
 

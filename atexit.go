@@ -35,23 +35,29 @@ func Exit(code int) {
 	os.Exit(code)
 }
 
+// Exit runs all the exitHandlers and then terminates the program using
+// os.Exit(code)
 func (e *Entry) Exit(code int) {
 	Exit(code)
 }
 
+// Exit runs all the exitHandlers and then terminates the program using
+// os.Exit(code)
 func (l *Logger) Exit(code int) {
 	Exit(code)
 }
 
-// Register adds a handler, call Exit in this module to invoke all exitHandlers.
+// AddExitHandler adds a handler, call Exit in this module to invoke all exitHandlers.
 func AddExitHandler(handler func()) {
 	exitHandlers = append(exitHandlers, handler)
 }
 
+// AddExitHandler adds a handler, call Exit in this module to invoke all exitHandlers.
 func (e *Entry) AddExitHandler(handler func()) {
 	AddExitHandler(handler)
 }
 
+// AddExitHandler adds a handler, call Exit in this module to invoke all exitHandlers.
 func (l *Logger) AddExitHandler(handler func()) {
 	AddExitHandler(handler)
 }

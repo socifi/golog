@@ -2,8 +2,8 @@
 package graylog
 
 import (
-	"github.com/socifi/go-logging-facility"
 	"github.com/aphistic/golf"
+	"github.com/socifi/go-logging-facility"
 )
 
 // Handler implementation.

@@ -4,11 +4,11 @@ import (
 	"encoding/base64"
 	"encoding/json"
 
-	"github.com/socifi/go-logging-facility"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/kinesis"
 	"github.com/rogpeppe/fastuuid"
+	"github.com/socifi/go-logging-facility"
 	k "github.com/tj/go-kinesis"
 )
 
