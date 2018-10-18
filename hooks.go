@@ -2,7 +2,7 @@ package log
 
 // Hook is an interface which has two functions.
 // It is intended to be used internaly on map[string]interface{}
-// Check checks a map string for a condition and if true is returned, Sanitize is called with a relevant value 
+// Check checks a map string for a condition and if true is returned, Sanitize is called with a relevant value
 type Hook interface {
 	Check(string) bool
 	Sanitize(interface{}) interface{}

@@ -1,6 +1,6 @@
 package dsn
 
-import(
+import (
 	"github.com/socifi/go-logging-facility"
 	"regexp"
 	"strings"
@@ -23,7 +23,7 @@ func (dsn) Check(s string) bool {
 }
 
 // Sanitize tries its best to replace all passwords in a string which has dsn format
-func (dsn) Sanitize(v interface{}) (interface{}) {
+func (dsn) Sanitize(v interface{}) interface{} {
 	s, ok := v.(string)
 	if !ok {
 		return v

@@ -3,9 +3,9 @@ package log
 import (
 	"fmt"
 	"os"
-	"time"
-	"strings"
 	"runtime/debug"
+	"strings"
+	"time"
 )
 
 // assert interface compliance.
@@ -16,17 +16,17 @@ var Now = time.Now
 
 // Entry represents a single log entry.
 type Entry struct {
-	Logger    *Logger	`json:"-"`
-	Fields    Fields	`json:"context"`
-	Level     int		`json:"level"`
-	LevelName string	`json:"level_name"`
-	Timestamp time.Time	`json:"timestamp"`
-	Message   string	`json:"message"`
+	Logger    *Logger   `json:"-"`
+	Fields    Fields    `json:"context"`
+	Level     int       `json:"level"`
+	LevelName string    `json:"level_name"`
+	Timestamp time.Time `json:"timestamp"`
+	Message   string    `json:"message"`
 	start     time.Time
 	fields    []Fields
-	Env       string	`json:"env"`
-	Project   string	`json:"project"`
-	Hostname  string	`json:"hostname"`
+	Env       string `json:"env"`
+	Project   string `json:"project"`
+	Hostname  string `json:"hostname"`
 }
 
 // NewEntry returns a new entry for `log`.
@@ -64,11 +64,6 @@ func (e *Entry) SetEnvProject(env string, project string) *Entry {
 
 // WithField returns a new entry with the `key` and `value` set.
 func (e *Entry) WithField(k string, v interface{}) *Entry {
-/*	for _, hook := range hooks {
-		if hook.Check(strings.ToLower(k)) {
-			f[k] = hook.Sanitize(v)
-		}
-	}*/
 	return e.WithFields(Fields{k: v})
 }
 
@@ -135,7 +130,6 @@ func (e *Entry) Emergency(msg string) {
 	e.Logger.log(EmergencyLevel, e, msg)
 }
 
-
 /* END OF WARNING */
 /********* End Entry simple *********/
 
@@ -186,7 +180,6 @@ func (e *Entry) Fatalf(msg string, v ...interface{}) {
 func (e *Entry) Emergencyf(msg string, v ...interface{}) {
 	e.Emergency(fmt.Sprintf(msg, v...))
 }
-
 
 /* END OF WARNING */
 /********* End Entry formated *********/
