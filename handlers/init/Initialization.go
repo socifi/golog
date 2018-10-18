@@ -10,7 +10,6 @@ import (
 	"github.com/socifi/go-logging-facility/handlers/es"
 	"github.com/socifi/go-logging-facility/handlers/json"
 	"github.com/socifi/go-logging-facility/handlers/multi"
-	"github.com/socifi/go-logging-facility/handlers/text"
 	"github.com/tj/go-elastic"
 )
 
@@ -37,17 +36,6 @@ func Init(config LogConfig) (logger *log.Entry) {
 			file, _ = os.Open(info["file"])
 		}
 		handlers = append(handlers, json.New(file))
-	}
-
-	if (h["text"]) != nil {
-		info, _ := h["text"].(map[string]string)
-		var file *os.File
-		if info["file"] == "stdout" || info["file"] == "" {
-			file = os.Stdout
-		} else {
-			file, _ = os.Open(info["file"])
-		}
-		handlers = append(handlers, text.New(file))
 	}
 
 	if (h["elastic"]) != nil {
