@@ -5,7 +5,6 @@ import (
 	"os"
 	"time"
 	"strings"
-	"regexp"
 	"runtime/debug"
 )
 
@@ -63,30 +62,14 @@ func (e *Entry) SetEnvProject(env string, project string) *Entry {
 	}
 }
 
-// replaceDsnPassword tries its best to replace all passwords in a string which has dsn format
-func replaceDsnPassword(s string) (string) {
-	r := regexp.MustCompile(`(.*?://)*(.+?:)(.+?)(@)`)
-	if r.MatchString(s) {
-		s = r.ReplaceAllString(s, "${1}${2}***${4}")
-	}
-
-	r = regexp.MustCompile(`([\s;])(p|password|pwd|pass|P|PASSWORD|PWD|PASS|Password|Pwd|Pass)([=:])(.*?)([\s;])`)
-	if r.MatchString(s) {
-		s = r.ReplaceAllString(s, "${1}${2}${3}***${5}")
-	}
-
-	return s
-}
-
-
 // WithField returns a new entry with the `key` and `value` set.
-func (e *Entry) WithField(key string, value interface{}) *Entry {
-	if strings.Contains(strings.ToLower(key), "dsn") {
-		if _, ok := value.(string); ok {
-			return e.WithFields(Fields{key: replaceDsnPassword(value.(string))})
+func (e *Entry) WithField(k string, v interface{}) *Entry {
+/*	for _, hook := range hooks {
+		if hook.Check(strings.ToLower(k)) {
+			f[k] = hook.Sanitize(v)
 		}
-	}
-	return e.WithFields(Fields{key: value})
+	}*/
+	return e.WithFields(Fields{k: v})
 }
 
 // WithError returns a new entry with the "error" set to `err`.
@@ -234,14 +217,10 @@ func (e *Entry) mergedFields() Fields {
 
 	for _, fields := range e.fields {
 		for k, v := range fields {
-			if strings.Contains(strings.ToLower(k), "dsn") {
-				if _, ok := v.(string); ok {
-					f[k] = replaceDsnPassword(v.(string))
-				} else {
-					f[k] = v
+			for _, hook := range hooks {
+				if hook.Check(strings.ToLower(k)) {
+					f[k] = hook.Sanitize(v)
 				}
-			} else {
-				f[k] = v
 			}
 		}
 	}
