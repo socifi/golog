@@ -3,8 +3,9 @@ package log
 import (
 	"fmt"
 	"os"
-	"time"
 	"runtime/debug"
+	"strings"
+	"time"
 )
 
 // assert interface compliance.
@@ -15,17 +16,17 @@ var Now = time.Now
 
 // Entry represents a single log entry.
 type Entry struct {
-	Logger    *Logger	`json:"-"`
-	Fields    Fields	`json:"context"`
-	Level     int		`json:"level"`
-	LevelName string	`json:"level_name"`
-	Timestamp time.Time	`json:"timestamp"`
-	Message   string	`json:"message"`
+	Logger    *Logger   `json:"-"`
+	Fields    Fields    `json:"context"`
+	Level     int       `json:"level"`
+	LevelName string    `json:"level_name"`
+	Timestamp time.Time `json:"timestamp"`
+	Message   string    `json:"message"`
 	start     time.Time
 	fields    []Fields
-	Env       string	`json:"env"`
-	Project   string	`json:"project"`
-	Hostname  string	`json:"hostname"`
+	Env       string `json:"env"`
+	Project   string `json:"project"`
+	Hostname  string `json:"hostname"`
 }
 
 // NewEntry returns a new entry for `log`.
@@ -62,8 +63,8 @@ func (e *Entry) SetEnvProject(env string, project string) *Entry {
 }
 
 // WithField returns a new entry with the `key` and `value` set.
-func (e *Entry) WithField(key string, value interface{}) *Entry {
-	return e.WithFields(Fields{key: value})
+func (e *Entry) WithField(k string, v interface{}) *Entry {
+	return e.WithFields(Fields{k: v})
 }
 
 // WithError returns a new entry with the "error" set to `err`.
@@ -129,7 +130,6 @@ func (e *Entry) Emergency(msg string) {
 	e.Logger.log(EmergencyLevel, e, msg)
 }
 
-
 /* END OF WARNING */
 /********* End Entry simple *********/
 
@@ -181,7 +181,6 @@ func (e *Entry) Emergencyf(msg string, v ...interface{}) {
 	e.Emergency(fmt.Sprintf(msg, v...))
 }
 
-
 /* END OF WARNING */
 /********* End Entry formated *********/
 
@@ -211,7 +210,11 @@ func (e *Entry) mergedFields() Fields {
 
 	for _, fields := range e.fields {
 		for k, v := range fields {
-			f[k] = v
+			for _, hook := range hooks {
+				if hook.Check(strings.ToLower(k)) {
+					f[k] = hook.Sanitize(v)
+				}
+			}
 		}
 	}
 
