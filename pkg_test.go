@@ -70,7 +70,11 @@ func Example_multipleFields() {
 
 // Trace can be used to simplify logging of start and completion events,
 // for example an upload which may fail.
-func Example_trace() (err error) {
+func traceUsage() (err error) {
 	defer log.Trace("upload").Stop(&err)
 	return nil
+}
+
+func Example_trace() {
+	traceUsage()
 }

@@ -10,10 +10,10 @@ import (
 	"github.com/socifi/go-logging-facility/handlers/es"
 	"github.com/socifi/go-logging-facility/handlers/json"
 	"github.com/socifi/go-logging-facility/handlers/multi"
-	"github.com/socifi/go-logging-facility/handlers/text"
 	"github.com/tj/go-elastic"
 )
 
+// LogConfig contains all needed information for logger initialization
 type LogConfig struct {
 	LogLevel string      `json:"logLevel"`
 	Handlers interface{} `json:"handlers,omitempty"`
@@ -22,6 +22,7 @@ type LogConfig struct {
 	Project  string      `json:"project"`
 }
 
+// Init initializes logger with values from LogConfig structure
 func Init(config LogConfig) (logger *log.Entry) {
 	h, _ := config.Handlers.(map[string]interface{})
 
@@ -35,17 +36,6 @@ func Init(config LogConfig) (logger *log.Entry) {
 			file, _ = os.Open(info["file"])
 		}
 		handlers = append(handlers, json.New(file))
-	}
-
-	if (h["text"]) != nil {
-		info, _ := h["text"].(map[string]string)
-		var file *os.File
-		if info["file"] == "stdout" || info["file"] == "" {
-			file = os.Stdout
-		} else {
-			file, _ = os.Open(info["file"])
-		}
-		handlers = append(handlers, text.New(file))
 	}
 
 	if (h["elastic"]) != nil {

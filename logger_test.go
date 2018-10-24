@@ -236,13 +236,13 @@ func BenchmarkLogger_large(b *testing.B) {
 			"size": 1 << 20,
 		}).
 			WithFields(log.Fields{
-			"some":     "more",
-			"data":     "here",
-			"whatever": "blah blah",
-			"more":     "stuff",
-			"context":  "such useful",
-			"much":     "fun",
-		}).
+				"some":     "more",
+				"data":     "here",
+				"whatever": "blah blah",
+				"more":     "stuff",
+				"context":  "such useful",
+				"much":     "fun",
+			}).
 			WithError(err).Error("upload failed")
 	}
 }

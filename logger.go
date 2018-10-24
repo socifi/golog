@@ -132,7 +132,6 @@ func (l *Logger) Emergency(msg string) {
 	NewEntry(l).Emergency(msg)
 }
 
-
 /* END OF WARNING */
 /********* End Log simple *********/
 
@@ -183,7 +182,6 @@ func (l *Logger) Fatalf(msg string, v ...interface{}) {
 func (l *Logger) Emergencyf(msg string, v ...interface{}) {
 	NewEntry(l).Emergencyf(msg, v...)
 }
-
 
 /* END OF WARNING */
 /********* End Log formated *********/

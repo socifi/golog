@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# Levels contain level names and codes. It is important to note that code is an integer.
+# Python allows other values but underlying go code won't allow anything except integers.
 levels = {
 	"debug": 100,
 	"info": 200,
@@ -7,9 +9,9 @@ levels = {
 	"warn": 300,
 	"error": 400,
 	"critical": 500,
-	"alert":550,
-	"fatal":600,
-	"emergency":600
+	"alert": 550,
+	"fatal": 600,
+	"emergency": 600
 }
 
 # Function for replacing part of file between marks

@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
 	"github.com/go-logfmt/logfmt"
+	"github.com/socifi/go-logging-facility"
 )
 
 // TODO: syslog portion is ad-hoc for my serverless use-case,

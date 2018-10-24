@@ -6,8 +6,8 @@ import (
 	"os"
 	"sync"
 
-	"github.com/socifi/go-logging-facility"
 	"github.com/go-logfmt/logfmt"
+	"github.com/socifi/go-logging-facility"
 )
 
 // Default handler outputting to stderr.

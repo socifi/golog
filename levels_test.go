@@ -1,8 +1,8 @@
 package log
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -40,10 +40,10 @@ func TestParseLevel(t *testing.T) {
 
 func TestLevel_MarshalJSON(t *testing.T) {
 	e := Entry{
-		Level:   InfoLevel,
-		LevelName:"info",
-		Message: "hello",
-		Fields:  Fields{},
+		Level:     InfoLevel,
+		LevelName: "info",
+		Message:   "hello",
+		Fields:    Fields{},
 	}
 
 	expect := `{"context":{},"level":200,"level_name":"info","timestamp":"0001-01-01T00:00:00Z","message":"hello"}`
