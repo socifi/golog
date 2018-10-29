@@ -3,15 +3,13 @@ package log
 import (
 	"fmt"
 	"os"
-)
-
-const (
-	// Version is package version
-	Version = "0.1.0"
+	"sync"
 )
 
 var exitHandlers = []func(){}
+var mux = &sync.Mutex{}
 
+// runHandler tries to run exactly one handler and if not successful, writes error message to stderr
 func runHandler(handler func()) {
 	defer func() {
 		if err := recover(); err != nil {
@@ -22,6 +20,7 @@ func runHandler(handler func()) {
 	handler()
 }
 
+// runHandlers is a helper function that runs all functions registered in exitHandlers
 func runHandlers() {
 	for _, handler := range exitHandlers {
 		runHandler(handler)
@@ -31,6 +30,8 @@ func runHandlers() {
 // Exit runs all the exitHandlers and then terminates the program using
 // os.Exit(code)
 func Exit(code int) {
+	mux.Lock()
+	defer mux.Unlock()
 	runHandlers()
 	os.Exit(code)
 }
@@ -48,16 +49,21 @@ func (l *Logger) Exit(code int) {
 }
 
 // AddExitHandler adds a handler, call Exit in this module to invoke all exitHandlers.
+// Thread safe
 func AddExitHandler(handler func()) {
+	mux.Lock()
+	defer mux.Unlock()
 	exitHandlers = append(exitHandlers, handler)
 }
 
 // AddExitHandler adds a handler, call Exit in this module to invoke all exitHandlers.
+// Thread safe
 func (e *Entry) AddExitHandler(handler func()) {
 	AddExitHandler(handler)
 }
 
 // AddExitHandler adds a handler, call Exit in this module to invoke all exitHandlers.
+// Thread safe
 func (l *Logger) AddExitHandler(handler func()) {
 	AddExitHandler(handler)
 }

@@ -63,7 +63,6 @@ func (e *Entry) SetEnvProject(env string, project string) *Entry {
 	}
 }
 
-
 // WithField returns a new entry with the `key` and `value` set.
 func (e *Entry) WithField(k string, v interface{}) *Entry {
 	return e.WithFields(Fields{k: v})
@@ -214,9 +213,10 @@ func (e *Entry) mergedFields() Fields {
 		for k, v := range fields {
 			for _, hook := range hooks {
 				if hook.Check(strings.ToLower(k)) {
-					f[k] = hook.Sanitize(v)
+					v = hook.Sanitize(v)
 				}
 			}
+			f[k] = v
 		}
 	}
 

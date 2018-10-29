@@ -25,5 +25,5 @@ func main() {
 	json.Unmarshal(raw, &c)
 	fmt.Printf("%#v\n", c)
 	logger := loginit.Init(c.Logging)
-	logger.WithField("dsn", "host=localhost port=5432 user=postgres password=postgres dbname=postgres sslmode=disable").Info("trial")
+	logger.WithField("dsn", "host=localhost port=5432 user=postgres password=postgres dbname=postgres sslmode=disable").WithField("a", "b").Info("trial")
 }
