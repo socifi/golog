@@ -56,7 +56,7 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 	var buf bytes.Buffer
 
 	enc := logfmt.NewEncoder(&buf)
-	enc.EncodeKeyval("level", e.Level.String())
+	enc.EncodeKeyval("level", e.Level)
 	enc.EncodeKeyval("message", e.Message)
 
 	for k, v := range e.Fields {

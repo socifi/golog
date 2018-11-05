@@ -17,7 +17,6 @@ func TestParseLevel(t *testing.T) {
 		{"debug", DebugLevel, 0},
 		{"info", InfoLevel, 1},
 		{"warn", WarnLevel, 2},
-		{"warning", WarnLevel, 3},
 		{"error", ErrorLevel, 4},
 		{"fatal", FatalLevel, 5},
 	}
@@ -46,7 +45,7 @@ func TestLevel_MarshalJSON(t *testing.T) {
 		Fields:    Fields{},
 	}
 
-	expect := `{"context":{},"level":200,"level_name":"info","timestamp":"0001-01-01T00:00:00Z","message":"hello"}`
+	expect := `{"context":{},"level":200,"level_name":"info","timestamp":"0001-01-01T00:00:00Z","message":"hello","env":"","project":"","hostname":""}`
 
 	b, err := json.Marshal(e)
 	assert.NoError(t, err)
