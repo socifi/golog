@@ -6,9 +6,9 @@ import (
 	"time"
 
 	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handlers/json"
-	"github.com/socifi/go-logging-facility/handlers/multi"
-	"github.com/socifi/go-logging-facility/handlers/text"
+	"github.com/socifi/go-logging-facility/handler/json"
+	"github.com/socifi/go-logging-facility/handler/multi"
+	"github.com/socifi/go-logging-facility/handler/text"
 )
 
 func main() {

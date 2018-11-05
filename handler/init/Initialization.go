@@ -1,4 +1,4 @@
-package loginit
+package log
 
 import (
 	"fmt"
@@ -6,27 +6,30 @@ import (
 	"os"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handlers/es"
-	"github.com/socifi/go-logging-facility/handlers/json"
-	"github.com/socifi/go-logging-facility/handlers/multi"
+	lg "github.com/socifi/go-logging-facility"
+//	"github.com/socifi/go-logging-facility/handler/discard"
+	"github.com/socifi/go-logging-facility/handler/es"
+	"github.com/socifi/go-logging-facility/handler/json"
+	"github.com/socifi/go-logging-facility/handler/multi"
 	"github.com/tj/go-elastic"
 )
 
+type Log lg.Interface
+
 // LogConfig contains all needed information for logger initialization
-type LogConfig struct {
+type Config struct {
 	LogLevel string      `json:"logLevel"`
 	Handlers interface{} `json:"handlers,omitempty"`
-	Context  log.Fields  `json:"context"`
+	Context  lg.Fields  `json:"context"`
 	Env      string      `json:"env"`
 	Project  string      `json:"project"`
 }
 
 // Init initializes logger with values from LogConfig structure
-func Init(config LogConfig) (logger *log.Entry) {
+func Init(config Config) (logger Log) {
 	h, _ := config.Handlers.(map[string]interface{})
 
-	var handlers []log.Handler
+	var handlers []lg.Handler
 	if (h["json"]) != nil {
 		info, _ := h["json"].(map[string]string)
 		var file *os.File
@@ -52,11 +55,11 @@ func Init(config LogConfig) (logger *log.Entry) {
 		}))
 	}
 
-	log.SetHandler(multi.New(handlers...))
-	log.SetLevelFromString(config.LogLevel)
-	log.WithFields(config.Context)
+	lg.SetHandler(multi.New(handlers...))
+	lg.SetLevelFromString(config.LogLevel)
+	lg.WithFields(config.Context)
 
-	logger = log.SetEnvProject(config.Env, config.Project)
+	logger = lg.SetEnvProject(config.Env, config.Project)
 	logger.Debug("Logger initialized")
 	return logger
 }

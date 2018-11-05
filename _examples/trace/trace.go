@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handlers/text"
+	"github.com/socifi/go-logging-facility/handler/text"
 )
 
 func work(ctx log.Interface) (err error) {

@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handlers/json"
+	"github.com/socifi/go-logging-facility/handler/json"
 )
 
 func one(ctx log.Interface) {

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handlers/logfmt"
+	"github.com/socifi/go-logging-facility/handler/logfmt"
 )
 
 func main() {
