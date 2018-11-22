@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handlers/memory"
+	"github.com/socifi/go-logging-facility/handler/memory"
 	"github.com/stretchr/testify/assert"
 )
 

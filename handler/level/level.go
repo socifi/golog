@@ -19,7 +19,7 @@ func New(h log.Handler, level log.Level) *Handler {
 
 // HandleLog implements log.Handler.
 func (h *Handler) HandleLog(e *log.Entry) error {
-	if e.Level < h.Level {
+	if e.Level < h.Level.Int() {
 		return nil
 	}
 

@@ -2,7 +2,7 @@
 	"logging": {
 		"env": "myExampleEnv",
 		"project": "myExampleProject",
-		"logLevel": "info",
+		"logLevel": "warn",
 		"handlers":{
 			"elastic": {
 				"host": "localhost",
@@ -16,7 +16,17 @@
 			},
 			"text": {
 				"file": "stdout"
+			},
+			"logfmt": {
+				"file": "stdout"
+			},
+			"papertrail": {
+				"host": "local",
+				"port": 155,
+				"hostname":"amalie",
+				"tag": "asdf"
 			}
+
 		},
 		"context": {
 			"composed": {

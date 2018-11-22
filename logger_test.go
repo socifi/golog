@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handlers/discard"
-	"github.com/socifi/go-logging-facility/handlers/memory"
+	"github.com/socifi/go-logging-facility/handler/discard"
+	"github.com/socifi/go-logging-facility/handler/memory"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -142,7 +142,7 @@ func TestLogger_Trace_error(t *testing.T) {
 		assert.Equal(t, e.Message, "upload")
 		assert.Equal(t, e.Level, log.ErrorLevel)
 		assert.Equal(t, "sloth.png", e.Fields["file"])
-		assert.Equal(t, "boom", e.Fields["error"])
+		assert.Equal(t, "boom", e.Fields["error"].(map[string]interface{})["message"])
 		assert.IsType(t, time.Duration(0), e.Fields["duration"])
 	}
 }

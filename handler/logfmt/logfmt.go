@@ -34,7 +34,7 @@ func (h *Handler) HandleLog(e *log.Entry) error {
 	defer h.mu.Unlock()
 
 	h.enc.EncodeKeyval("timestamp", e.Timestamp)
-	h.enc.EncodeKeyval("level", e.Level.String())
+	h.enc.EncodeKeyval("level", e.Level)
 	h.enc.EncodeKeyval("message", e.Message)
 
 	for _, name := range names {

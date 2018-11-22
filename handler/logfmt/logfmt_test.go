@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handlers/logfmt"
+	"github.com/socifi/go-logging-facility/handler/logfmt"
 )
 
 func init() {
@@ -26,9 +26,9 @@ func Test(t *testing.T) {
 	log.Info("world")
 	log.Error("boom")
 
-	expected := `timestamp=1970-01-01T00:00:00Z level=info message=hello id=123 user=tj
-timestamp=1970-01-01T00:00:00Z level=info message=world
-timestamp=1970-01-01T00:00:00Z level=error message=boom
+	expected := `timestamp=1970-01-01T00:00:00Z level=200 message=hello id=123 user=tj
+timestamp=1970-01-01T00:00:00Z level=200 message=world
+timestamp=1970-01-01T00:00:00Z level=400 message=boom
 `
 
 	assert.Equal(t, expected, buf.String())
