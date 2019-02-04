@@ -8,8 +8,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/logfmt"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/logfmt"
 )
 
 func init() {

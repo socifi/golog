@@ -1,7 +1,7 @@
 package dsn
 
 import (
-	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/golog"
 	"regexp"
 	"strings"
 )

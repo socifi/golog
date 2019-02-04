@@ -4,8 +4,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/text"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/text"
 )
 
 func work(ctx log.Interface) (err error) {

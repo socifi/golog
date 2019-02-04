@@ -5,9 +5,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/level"
-	"github.com/socifi/go-logging-facility/handler/memory"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/level"
+	"github.com/socifi/golog/handler/memory"
 )
 
 func Test(t *testing.T) {

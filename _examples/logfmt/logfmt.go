@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/logfmt"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/logfmt"
 )
 
 func main() {

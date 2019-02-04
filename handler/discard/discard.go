@@ -2,7 +2,7 @@
 package discard
 
 import (
-	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/golog"
 )
 
 // Default handler.

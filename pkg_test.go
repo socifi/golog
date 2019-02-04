@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/memory"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/memory"
 	"github.com/stretchr/testify/assert"
 )
 

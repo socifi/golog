@@ -1,4 +1,6 @@
-# Go logging facility
+# Golog
+
+Golog is palindrome. Palindromes are cool! Like `A Santa at Nasa.` or `Flee to me, remote elf.`
 
 Based on [Apex log](https://github.com/apex/log) with few tweaks. Unless otherwise noted (mainly in `pkg.go`), this package should be thread safe. Just for the record the architecture leaves almost all thread safety on handlers so if you are uncertain, consult the documentation and code of the handlers you use.
 
@@ -19,8 +21,8 @@ The hooks are useful for many things. The most important use-case is for filteri
 ```golang
 import(
 	// ...
-	"github.com/socifi/go-logging-facility"
-	_ "github.com/socifi/go-logging-facility/hook/dsn"
+	"github.com/socifi/golog"
+	_ "github.com/socifi/golog/hook/dsn"
 	// ...
 )
 ```
@@ -36,7 +38,7 @@ Example implementations of hooks are in folder `hook/`.
 package hook
 
 import (
-	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/golog"
 	"strings"
 )
 
@@ -73,7 +75,7 @@ func (dsn) Sanitize(v interface{}) interface{} {
 
 ### Atexit
 
-Inspired by [atexit module](github.com/tebeka/atexit) go logging facility also offers the possibility to register a function which will be run on system exit. However this functionality has the same caveat as atexit, the program needs to be closed with any `Exit(code int)` function in this module. This function as well as `AddExitHandler(handler func())` which registers functions to be run on program exit is defined for both module, logger and entry.
+Inspired by [atexit module](github.com/tebeka/atexit) golog also offers the possibility to register a function which will be run on system exit. However this functionality has the same caveat as atexit, the program needs to be closed with any `Exit(code int)` function in this module. This function as well as `AddExitHandler(handler func())` which registers functions to be run on program exit is defined for both module, logger and entry.
 
 A side note: To access local variables use closures:
 
@@ -101,8 +103,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/socifi/go-logging-facility/handlers/init"
-	_ "github.com/socifi/go-logging-facility/hook/dsn"
+	"github.com/socifi/golog/handlers/init"
+	_ "github.com/socifi/golog/hook/dsn"
 	"io/ioutil"
 	"os"
 )

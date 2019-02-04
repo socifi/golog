@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/go-logfmt/logfmt"
-	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/golog"
 )
 
 // TODO: syslog portion is ad-hoc for my serverless use-case,

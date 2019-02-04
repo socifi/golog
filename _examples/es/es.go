@@ -6,10 +6,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/es"
-	"github.com/socifi/go-logging-facility/handler/multi"
-	"github.com/socifi/go-logging-facility/handler/text"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/es"
+	"github.com/socifi/golog/handler/multi"
+	"github.com/socifi/golog/handler/text"
 	"github.com/tj/go-elastic"
 )
 

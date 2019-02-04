@@ -4,10 +4,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/kinesis"
-	"github.com/socifi/go-logging-facility/handler/multi"
-	"github.com/socifi/go-logging-facility/handler/text"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/kinesis"
+	"github.com/socifi/golog/handler/multi"
+	"github.com/socifi/golog/handler/text"
 )
 
 func main() {

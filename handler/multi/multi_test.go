@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/memory"
-	"github.com/socifi/go-logging-facility/handler/multi"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/memory"
+	"github.com/socifi/golog/handler/multi"
 )
 
 func init() {

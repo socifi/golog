@@ -11,7 +11,7 @@ import (
 
 	"github.com/tj/go-elastic/batch"
 
-	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/golog"
 )
 
 // TODO(tj): allow dumping logs to stderr on timeout

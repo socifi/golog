@@ -7,7 +7,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/golog"
 )
 
 // Default handler outputting to stderr.

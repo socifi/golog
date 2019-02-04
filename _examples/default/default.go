@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/golog"
 )
 
 func main() {

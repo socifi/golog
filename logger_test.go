@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/discard"
-	"github.com/socifi/go-logging-facility/handler/memory"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/discard"
+	"github.com/socifi/golog/handler/memory"
 	"github.com/stretchr/testify/assert"
 )
 

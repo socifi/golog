@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/json"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/json"
 )
 
 func init() {

@@ -7,8 +7,8 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/socifi/go-logging-facility"
-	"github.com/socifi/go-logging-facility/handler/json"
+	"github.com/socifi/golog"
+	"github.com/socifi/golog/handler/json"
 )
 
 func one(ctx log.Interface) {

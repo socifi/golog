@@ -2,7 +2,7 @@
 package multi
 
 import (
-	"github.com/socifi/go-logging-facility"
+	"github.com/socifi/golog"
 )
 
 // Handler implementation.
